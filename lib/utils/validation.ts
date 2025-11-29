@@ -29,7 +29,7 @@ export function checkBlockedPhrases(text: string): string | null {
 // Step 1: Category
 export const categoryStepSchema = z.object({
   property_type: z.enum(['apartment', 'house', 'room', 'studio'], {
-    required_error: 'Please select a property type',
+    message: 'Please select a property type',
   }),
 })
 

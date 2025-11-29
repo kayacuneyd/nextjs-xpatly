@@ -300,16 +300,17 @@ export async function createNotification(data: {
 }
 
 export async function getNotificationsByUserId(userId: string, unreadOnly = false) {
-  let query = db
-    .select()
-    .from(notifications)
-    .where(eq(notifications.userId, userId))
+  const conditions = [eq(notifications.userId, userId)]
 
   if (unreadOnly) {
-    query = query.where(eq(notifications.read, false)) as typeof query
+    conditions.push(eq(notifications.read, false))
   }
 
-  return await query.orderBy(desc(notifications.createdAt))
+  return await db
+    .select()
+    .from(notifications)
+    .where(and(...conditions))
+    .orderBy(desc(notifications.createdAt))
 }
 
 export async function markNotificationAsRead(notificationId: string) {
