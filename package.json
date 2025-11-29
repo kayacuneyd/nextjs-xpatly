@@ -13,6 +13,7 @@
     "@react-email/components": "^1.0.1",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.86.0",
+    "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.7",
     "mapbox-gl": "^3.16.0",
     "next": "16.0.5",
@@ -23,6 +24,7 @@
     "react-hook-form": "^7.67.0",
     "react-map-gl": "^8.1.0",
     "resend": "^6.5.2",
+    "tailwind-merge": "^3.4.0",
     "zod": "^4.1.13"
   },
   "devDependencies": {
