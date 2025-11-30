@@ -5,14 +5,22 @@ import { defaultLocale, locales } from './i18n'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Skip API/static routes
+  // Skip API/static routes and admin routes (admin doesn't use locale)
   if (
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
     pathname.startsWith('/auth') ||
+    pathname.startsWith('/admin') ||
     pathname.match(/\.(svg|png|jpg|jpeg|gif|webp)$/)
   ) {
+    // Still update session for admin routes
+    if (pathname.startsWith('/admin')) {
+      const supabaseResponse = await updateSession(request)
+      if (supabaseResponse) {
+        return supabaseResponse
+      }
+    }
     return NextResponse.next()
   }
 
@@ -51,6 +59,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|auth).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }
