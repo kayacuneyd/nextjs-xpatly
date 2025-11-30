@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { requireAdmin } from '@/lib/auth/admin'
+import Link from 'next/link'
 
 export default async function AdminLayout({
   children,

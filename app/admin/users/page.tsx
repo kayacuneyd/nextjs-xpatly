@@ -1,5 +1,5 @@
-import { createClient } from '@/lib/supabase/server'
 import { UserManagementActions } from '@/components/admin/UserManagementActions'
+import { createClient } from '@/lib/supabase/server'
 
 // Disable caching to always show latest users
 export const dynamic = 'force-dynamic'

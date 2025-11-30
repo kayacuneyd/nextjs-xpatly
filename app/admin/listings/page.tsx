@@ -1,6 +1,6 @@
+import { ApproveRejectButtons } from '@/components/admin/ApproveRejectButtons'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { ApproveRejectButtons } from '@/components/admin/ApproveRejectButtons'
 
 // Disable caching to always show latest listings
 export const dynamic = 'force-dynamic'

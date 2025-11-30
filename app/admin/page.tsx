@@ -1,6 +1,6 @@
+import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 
 // Disable caching to always show latest stats
 export const dynamic = 'force-dynamic'
