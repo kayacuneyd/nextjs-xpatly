@@ -148,7 +148,15 @@
   "createListing": {
     "pageTitle": "Loo uus kuulutus",
     "pageSubtitle": "Lisa oma kinnisvara ja ühenda endaga kodu otsivad välismaalased",
-    "steps": ["Kategooria", "Aadress", "Üksikasjad", "Meedia", "Hinnastamine", "Saadavus", "Eelvaade"],
+    "steps": [
+      "Kategooria",
+      "Aadress",
+      "Üksikasjad",
+      "Meedia",
+      "Hinnastamine",
+      "Saadavus",
+      "Eelvaade"
+    ],
     "categoryTitle": "Vali kinnisvara tüüp",
     "addressTitle": "Kinnisvara aadress",
     "detailsTitle": "Kinnisvara üksikasjad",

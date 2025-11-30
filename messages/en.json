@@ -148,7 +148,15 @@
   "createListing": {
     "pageTitle": "Create New Listing",
     "pageSubtitle": "List your property and connect with expats looking for housing",
-    "steps": ["Category", "Address", "Details", "Media", "Pricing", "Availability", "Preview"],
+    "steps": [
+      "Category",
+      "Address",
+      "Details",
+      "Media",
+      "Pricing",
+      "Availability",
+      "Preview"
+    ],
     "categoryTitle": "Select Property Type",
     "addressTitle": "Property Address",
     "detailsTitle": "Property Details",
