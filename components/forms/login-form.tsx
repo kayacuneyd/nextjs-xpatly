@@ -1,17 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useTranslations, useLocale } from 'next-intl'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { loginSchema } from '@/lib/utils/validation'
-import { signIn, signInWithGoogle } from '@/lib/auth/actions'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { signIn, signInWithGoogle } from '@/lib/auth/actions'
+import { loginSchema } from '@/lib/utils/validation'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useLocale, useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
 
 type LoginFormData = z.infer<typeof loginSchema>
@@ -83,6 +83,7 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
               id="email"
               type="email"
               placeholder="you@example.com"
+              autoComplete="email"
               {...register('email')}
               disabled={loading}
             />
@@ -105,6 +106,7 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
               id="password"
               type="password"
               placeholder="••••••••"
+              autoComplete="current-password"
               {...register('password')}
               disabled={loading}
             />

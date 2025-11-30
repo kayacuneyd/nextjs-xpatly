@@ -1,8 +1,8 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export async function signIn(email: string, password: string) {
   const supabase = await createClient()
@@ -65,10 +65,20 @@ export async function signUp(email: string, password: string) {
     })
   }
 
+  // Check if email confirmation is required
+  // If user.identities is empty, it means the user already exists
+  // If email_confirmed_at is null and identities exist, email confirmation is required
+  const requiresEmailConfirmation = data.user?.identities?.length === 0 
+    ? false 
+    : !data.user?.email_confirmed_at
+
   return {
     success: true,
     user: data.user,
-    message: 'Please check your email to verify your account'
+    requiresEmailConfirmation,
+    message: requiresEmailConfirmation 
+      ? 'Please check your email to verify your account'
+      : 'Account created successfully!'
   }
 }
 

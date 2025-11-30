@@ -1,16 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { signInWithGoogle, signUp } from '@/lib/auth/actions'
+import { registerSchema } from '@/lib/utils/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { registerSchema } from '@/lib/utils/validation'
-import { signUp, signInWithGoogle } from '@/lib/auth/actions'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
 
 type RegisterFormData = z.infer<typeof registerSchema>
@@ -18,6 +19,7 @@ type RegisterFormData = z.infer<typeof registerSchema>
 export function RegisterForm() {
   const t = useTranslations()
   const locale = useLocale()
+  const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -25,6 +27,7 @@ export function RegisterForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -41,7 +44,15 @@ export function RegisterForm() {
       setError(result.error)
       setLoading(false)
     } else {
-      setSuccess(result.message || t('auth.register.success'))
+      // Check if email confirmation is required
+      if (result.requiresEmailConfirmation) {
+        setSuccess(result.message || t('auth.register.success'))
+        reset() // Clear form on success
+      } else {
+        // User is auto-confirmed, redirect to home
+        router.push(`/${locale}`)
+        router.refresh()
+      }
       setLoading(false)
     }
   }
@@ -84,6 +95,7 @@ export function RegisterForm() {
               id="email"
               type="email"
               placeholder="you@example.com"
+              autoComplete="email"
               {...register('email')}
               disabled={loading}
             />
@@ -98,6 +110,7 @@ export function RegisterForm() {
               id="password"
               type="password"
               placeholder="••••••••"
+              autoComplete="new-password"
               {...register('password')}
               disabled={loading}
             />
@@ -115,6 +128,7 @@ export function RegisterForm() {
               id="confirmPassword"
               type="password"
               placeholder="••••••••"
+              autoComplete="new-password"
               {...register('confirmPassword')}
               disabled={loading}
             />
