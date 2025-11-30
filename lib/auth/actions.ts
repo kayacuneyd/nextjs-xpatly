@@ -17,11 +17,12 @@ export async function signIn(email: string, password: string) {
     return { error: error.message }
   }
 
-  // Ensure user exists in users table
+  // Ensure user exists in users table and get their role
+  let userRole = 'user'
   if (data.user) {
     const { data: existingUser } = await supabase
       .from('users')
-      .select('id')
+      .select('id, role')
       .eq('id', data.user.id)
       .single()
 
@@ -35,11 +36,13 @@ export async function signIn(email: string, password: string) {
         is_approved: false,
         is_banned: false,
       })
+    } else {
+      userRole = existingUser.role
     }
   }
 
   revalidatePath('/', 'layout')
-  return { success: true, user: data.user }
+  return { success: true, user: data.user, role: userRole }
 }
 
 export async function signUp(email: string, password: string, userType: UserType = 'tenant') {

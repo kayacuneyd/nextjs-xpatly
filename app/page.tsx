@@ -2,6 +2,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Button } from '@/components/ui/button'
 import { UserNav } from '@/components/ui/user-nav'
 import { getUser } from '@/lib/auth/actions'
+import { createClient } from '@/lib/supabase/server'
 import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
@@ -10,6 +11,20 @@ export default async function Home() {
   const locale = await getLocale()
   const user = await getUser()
   const country = t('home.hero.country')
+  
+  // Get user role if logged in
+  let userRole: 'super_admin' | 'moderator' | 'owner' | 'user' = 'user'
+  if (user) {
+    const supabase = await createClient()
+    const { data: userData } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', user.id)
+      .single()
+    if (userData?.role) {
+      userRole = userData.role as typeof userRole
+    }
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
@@ -37,7 +52,7 @@ export default async function Home() {
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             {user ? (
-              <UserNav user={{ email: user.email! }} />
+              <UserNav user={{ email: user.email! }} role={userRole} />
             ) : (
               <div className="flex items-center gap-3">
                 <Link href={`/${locale}/login`}>

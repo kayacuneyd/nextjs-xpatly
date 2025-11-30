@@ -45,6 +45,12 @@ export default function ProfilePage() {
       .eq('id', user.id)
       .single()
 
+    // Redirect admins to admin dashboard
+    if (profileData?.role === 'super_admin' || profileData?.role === 'moderator') {
+      router.push('/admin')
+      return
+    }
+
     if (profileData) {
       setProfile({
         email: profileData.email,

@@ -97,6 +97,11 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
+  // Admins should not access user dashboard - redirect to admin dashboard
+  if (profile?.role === 'super_admin' || profile?.role === 'moderator') {
+    redirect('/admin')
+  }
+
   const activeListings = listings.filter(l => l.status === 'active')
   const pendingListings = listings.filter(l => l.status === 'pending')
   const rejectedListings = listings.filter(l => l.status === 'rejected')

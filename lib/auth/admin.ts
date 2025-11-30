@@ -1,20 +1,15 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { getLocale } from 'next-intl/server'
 
 export async function requireAdmin() {
   const supabase = await createClient()
-
-  // Always have a locale prefix to redirect with
-  const locale = await getLocale().catch(() => 'en')
-  const prefix = `/${locale || 'en'}`
 
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect(`${prefix}/login?redirectTo=${encodeURIComponent(`${prefix}/admin`)}`)
+    redirect('/login?redirectTo=/admin')
   }
 
   // Get user role from database
@@ -42,23 +37,23 @@ export async function requireAdmin() {
 
       if (insertError || !newUser) {
         console.error('Error creating user:', insertError)
-        redirect(`${prefix}/login?redirectTo=${encodeURIComponent(`${prefix}/admin`)}`)
+        redirect('/login?redirectTo=/admin')
       }
 
       userData = newUser
     }
   } catch (e) {
     console.error('Error ensuring user exists:', e)
-    redirect(`${prefix}/login?redirectTo=${encodeURIComponent(`${prefix}/admin`)}`)
+    redirect('/login?redirectTo=/admin')
   }
 
   if (userData.is_banned) {
-    redirect(`${prefix}/login?redirectTo=${encodeURIComponent(`${prefix}/admin`)}`)
+    redirect('/login?redirectTo=/admin')
   }
 
   // Check if user is admin or moderator
   if (userData.role !== 'super_admin' && userData.role !== 'moderator') {
-    redirect(`${prefix}/login?redirectTo=${encodeURIComponent(`${prefix}/admin`)}`)
+    redirect('/')
   }
 
   return {

@@ -46,7 +46,12 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
       setError(result.error)
       setLoading(false)
     } else {
-      router.push(target)
+      // Redirect admins to admin dashboard, regular users to their target
+      if (result.role === 'super_admin' || result.role === 'moderator') {
+        router.push('/admin')
+      } else {
+        router.push(target)
+      }
       router.refresh()
     }
   }
