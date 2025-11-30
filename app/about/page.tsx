@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { getLocale, getTranslations } from 'next-intl/server'
-import { getUser } from '@/lib/auth/actions'
-import { UserNav } from '@/components/ui/user-nav'
-import { Button } from '@/components/ui/button'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { Button } from '@/components/ui/button'
+import { UserNav } from '@/components/ui/user-nav'
+import { getUser } from '@/lib/auth/actions'
+import { getLocale, getTranslations } from 'next-intl/server'
+import Link from 'next/link'
 
 export default async function AboutPage() {
   const t = await getTranslations()

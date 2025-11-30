@@ -1,6 +1,6 @@
-import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
-import { locales, defaultLocale } from './i18n'
+import { NextResponse, type NextRequest } from 'next/server'
+import { defaultLocale, locales } from './i18n'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
