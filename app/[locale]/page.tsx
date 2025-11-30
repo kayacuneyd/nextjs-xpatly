@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { getLocale, getTranslations } from 'next-intl/server'
-import { getUser } from '@/lib/auth/actions'
-import { UserNav } from '@/components/ui/user-nav'
-import { Button } from '@/components/ui/button'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { Button } from '@/components/ui/button'
+import { UserNav } from '@/components/ui/user-nav'
+import { getUser } from '@/lib/auth/actions'
+import { getLocale, getTranslations } from 'next-intl/server'
+import Link from 'next/link'
 
 export default async function Home() {
   const t = await getTranslations()
@@ -20,7 +20,7 @@ export default async function Home() {
             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
               <span className="text-white font-bold text-xl">X</span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="hidden md:inline text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               Xpatly
             </span>
           </Link>

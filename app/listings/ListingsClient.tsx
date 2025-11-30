@@ -1,13 +1,13 @@
 'use client'
 
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
-import { useLocale, useTranslations } from 'next-intl'
 import { ListingCard } from '@/components/listings/ListingCard'
 import { ListingsMap } from '@/components/listings/ListingsMap'
 import { SearchFilters, type SearchFilters as SearchFiltersType } from '@/components/listings/SearchFilters'
 import { Button } from '@/components/ui/button'
+import { useLocale, useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
 
 interface Listing {
   id: string
@@ -72,8 +72,13 @@ export function ListingsClient() {
       {/* Simple Header */}
       <header className="border-b border-slate-200 bg-white">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href={`/${locale}`} className="text-2xl font-bold text-slate-900">
-            Xpatly
+          <Link href={`/${locale}`} className="flex items-center gap-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-xl">X</span>
+            </div>
+            <span className="hidden md:inline text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Xpatly
+            </span>
           </Link>
           <div className="flex items-center gap-4 text-sm text-slate-700">
             <Link href={`/${locale}/listings`} className="hover:text-slate-900">
