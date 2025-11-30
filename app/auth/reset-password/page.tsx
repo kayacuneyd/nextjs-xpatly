@@ -7,18 +7,92 @@ import { Label } from '@/components/ui/label'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 function ResetPasswordForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [sessionReady, setSessionReady] = useState(false)
 
+  const mode = searchParams.get('mode')
   const code = searchParams.get('code')
+
+  useEffect(() => {
+    const handleAuth = async () => {
+      const supabase = createClient()
+
+      // If mode=update, session was already established by callback route
+      if (mode === 'update') {
+        const { data: { session } } = await supabase.auth.getSession()
+        if (session) {
+          setSessionReady(true)
+          setLoading(false)
+          return
+        }
+      }
+
+      // Check if we have hash parameters (from email link)
+      if (typeof window !== 'undefined') {
+        const hash = window.location.hash
+        if (hash && hash.includes('access_token')) {
+          // Parse hash fragment
+          const params = new URLSearchParams(hash.substring(1))
+          const accessToken = params.get('access_token')
+          const refreshToken = params.get('refresh_token')
+          const type = params.get('type')
+
+          if (type === 'recovery' && accessToken && refreshToken) {
+            // Set session from tokens
+            const { error: sessionError } = await supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken,
+            })
+
+            if (!sessionError) {
+              // Clear hash from URL
+              window.history.replaceState(null, '', window.location.pathname + '?mode=update')
+              setSessionReady(true)
+              setLoading(false)
+              return
+            }
+          }
+        }
+      }
+
+      // Try to exchange code for session if present
+      if (code) {
+        try {
+          const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
+          if (!exchangeError) {
+            setSessionReady(true)
+            setLoading(false)
+            return
+          }
+        } catch {
+          // Code exchange failed
+        }
+      }
+
+      // Check if user already has a valid session (e.g., from callback)
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        setSessionReady(true)
+        setLoading(false)
+        return
+      }
+
+      // No valid auth method found
+      setError('Invalid or expired reset link. Please request a new password reset.')
+      setLoading(false)
+    }
+
+    handleAuth()
+  }, [code, mode])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,14 +113,6 @@ function ResetPasswordForm() {
     try {
       const supabase = createClient()
 
-      // Exchange code for session first
-      if (code) {
-        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
-        if (exchangeError) {
-          throw new Error('Invalid or expired reset link. Please request a new one.')
-        }
-      }
-
       // Update password
       const { error: updateError } = await supabase.auth.updateUser({
         password: password,
@@ -55,6 +121,9 @@ function ResetPasswordForm() {
       if (updateError) {
         throw updateError
       }
+
+      // Sign out after password change
+      await supabase.auth.signOut()
 
       setSuccess(true)
       
@@ -67,6 +136,20 @@ function ResetPasswordForm() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (loading) {
+    return (
+      <Card className="w-full max-w-md">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Verifying Reset Link...</CardTitle>
+          <CardDescription>Please wait while we verify your reset link.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex justify-center py-8">
+          <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-600 rounded-full animate-spin"></div>
+        </CardContent>
+      </Card>
+    )
   }
 
   if (success) {
@@ -92,7 +175,7 @@ function ResetPasswordForm() {
     )
   }
 
-  if (!code) {
+  if (!sessionReady && error) {
     return (
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
@@ -102,9 +185,7 @@ function ResetPasswordForm() {
             </svg>
           </div>
           <CardTitle className="text-2xl text-red-600">Invalid Reset Link</CardTitle>
-          <CardDescription>
-            This password reset link is invalid or has expired.
-          </CardDescription>
+          <CardDescription>{error}</CardDescription>
         </CardHeader>
         <CardContent className="text-center">
           <Link href="/en/forgot-password">

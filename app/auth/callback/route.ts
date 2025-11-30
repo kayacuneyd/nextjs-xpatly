@@ -4,13 +4,22 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
+  const next = requestUrl.searchParams.get('next') ?? '/'
   const origin = requestUrl.origin
 
   if (code) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.exchangeCodeForSession(code)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
     
-    if (user) {
+    if (!error && data?.user) {
+      const user = data.user
+      
+      // Check if this is a password recovery flow (next points to reset-password)
+      if (next.includes('/auth/reset-password')) {
+        // User is in recovery mode, redirect to password update page
+        return NextResponse.redirect(`${origin}/auth/reset-password?mode=update`)
+      }
+      
       // Check if user exists in users table
       const { data: existingUser } = await supabase
         .from('users')
@@ -37,6 +46,9 @@ export async function GET(request: Request) {
       if (existingUser.role === 'super_admin' || existingUser.role === 'moderator') {
         return NextResponse.redirect(`${origin}/admin`)
       }
+      
+      // Redirect to next URL or home
+      return NextResponse.redirect(`${origin}${next}`)
     }
   }
 
