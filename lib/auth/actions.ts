@@ -100,7 +100,7 @@ export async function signOut() {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/login')
+  redirect('/en/login')
 }
 
 export async function signInWithGoogle() {

@@ -9,7 +9,7 @@ export async function requireAdmin() {
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login?redirectTo=/admin')
+    redirect('/en/login?redirectTo=/admin')
   }
 
   // Get user role from database
@@ -37,23 +37,23 @@ export async function requireAdmin() {
 
       if (insertError || !newUser) {
         console.error('Error creating user:', insertError)
-        redirect('/login?redirectTo=/admin')
+        redirect('/en/login?redirectTo=/admin')
       }
 
       userData = newUser
     }
   } catch (e) {
     console.error('Error ensuring user exists:', e)
-    redirect('/login?redirectTo=/admin')
+    redirect('/en/login?redirectTo=/admin')
   }
 
   if (userData.is_banned) {
-    redirect('/login?redirectTo=/admin')
+    redirect('/en/login?redirectTo=/admin')
   }
 
   // Check if user is admin or moderator
   if (userData.role !== 'super_admin' && userData.role !== 'moderator') {
-    redirect('/')
+    redirect('/en')
   }
 
   return {

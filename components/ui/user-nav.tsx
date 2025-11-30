@@ -1,7 +1,6 @@
 'use client'
 
 import { signOut } from '@/lib/auth/actions'
-import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
@@ -16,8 +15,6 @@ export function UserNav({ user, role = 'user' }: UserNavProps) {
   const [loading, setLoading] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const t = useTranslations()
-  const locale = useLocale()
   
   const isAdmin = role === 'super_admin' || role === 'moderator'
 
@@ -33,7 +30,12 @@ export function UserNav({ user, role = 'user' }: UserNavProps) {
 
   const handleSignOut = async () => {
     setLoading(true)
-    await signOut()
+    try {
+      await signOut()
+    } catch {
+      // If signOut fails or redirects, this might not run
+      setLoading(false)
+    }
   }
 
   return (
@@ -109,30 +111,30 @@ export function UserNav({ user, role = 'user' }: UserNavProps) {
             // Regular User Menu
             <>
               <Link
-                href={`/${locale}/dashboard`}
+                href="/dashboard"
                 className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                 onClick={() => setMenuOpen(false)}
               >
                 <span>📊</span>
-                {t('nav.dashboard') || 'Dashboard'}
+                Dashboard
               </Link>
               
               <Link
-                href={`/${locale}/dashboard/profile`}
+                href="/dashboard/profile"
                 className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                 onClick={() => setMenuOpen(false)}
               >
                 <span>👤</span>
-                {t('nav.profile')}
+                Profile
               </Link>
               
               <Link
-                href={`/${locale}/create-listing`}
+                href="/listings/new"
                 className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                 onClick={() => setMenuOpen(false)}
               >
                 <span>➕</span>
-                {t('nav.createListing')}
+                Create Listing
               </Link>
             </>
           )}
@@ -145,7 +147,7 @@ export function UserNav({ user, role = 'user' }: UserNavProps) {
             className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition disabled:opacity-50"
           >
             <span>🚪</span>
-            {loading ? t('common.loading') : t('nav.logout')}
+            {loading ? 'Signing out...' : 'Sign Out'}
           </button>
         </div>
       )}

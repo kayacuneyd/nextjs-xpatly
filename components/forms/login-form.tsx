@@ -7,7 +7,6 @@ import { Label } from '@/components/ui/label'
 import { signIn, signInWithGoogle } from '@/lib/auth/actions'
 import { loginSchema } from '@/lib/utils/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -22,9 +21,7 @@ interface LoginFormProps {
 
 export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
   const router = useRouter()
-  const t = useTranslations()
-  const locale = useLocale()
-  const target = redirectTo || `/${locale}`
+  const target = redirectTo || '/en'
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -71,8 +68,8 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-2xl">{t('auth.login.title')}</CardTitle>
-        <CardDescription>{t('auth.login.subtitle')}</CardDescription>
+        <CardTitle className="text-2xl">Sign In</CardTitle>
+        <CardDescription>Enter your credentials to access your account</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -83,7 +80,7 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email">{t('auth.login.email')}</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
@@ -99,12 +96,12 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">{t('auth.login.password')}</Label>
+              <Label htmlFor="password">Password</Label>
               <Link
-                href={`/${locale}/forgot-password`}
+                href="/forgot-password"
                 className="text-sm text-slate-600 hover:text-slate-900"
               >
-                {t('auth.login.forgotPassword')}
+                Forgot password?
               </Link>
             </div>
             <Input
@@ -121,7 +118,7 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
           </div>
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? t('auth.login.signingIn') : t('auth.login.signIn')}
+            {loading ? 'Signing in...' : 'Sign In'}
           </Button>
         </form>
 
@@ -130,7 +127,7 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-slate-500">{t('auth.login.orContinueWith')}</span>
+            <span className="bg-white px-2 text-slate-500">Or continue with</span>
           </div>
         </div>
 
@@ -159,14 +156,14 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
               fill="#EA4335"
             />
           </svg>
-          {t('auth.login.signInWithGoogle')}
+          Sign in with Google
         </Button>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
         <div className="text-sm text-center text-slate-600">
-          {t('auth.login.noAccount')}{' '}
-          <Link href={`/${locale}/register`} className="text-slate-900 font-medium hover:underline">
-            {t('auth.login.signUp')}
+          Don&apos;t have an account?{' '}
+          <Link href="/register" className="text-slate-900 font-medium hover:underline">
+            Sign up
           </Link>
         </div>
       </CardFooter>
