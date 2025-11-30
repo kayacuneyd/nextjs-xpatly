@@ -211,6 +211,16 @@
       "privacy": "Privacy Policy",
       "agree": "By signing up, you agree to our"
     },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a link to reset your password",
+      "email": "Email",
+      "sendLink": "Send reset link",
+      "sending": "Sending...",
+      "success": "Check your email for the password reset link",
+      "rememberPassword": "Remember your password?",
+      "backToLogin": "Back to login"
+    },
     "errors": {
       "invalidCredentials": "Invalid email or password",
       "emailInUse": "Email already in use",

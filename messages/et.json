@@ -211,6 +211,16 @@
       "privacy": "Privaatsuspoliitika",
       "agree": "Registreerudes nõustud meiega"
     },
+    "forgotPassword": {
+      "title": "Taasta oma parool",
+      "subtitle": "Sisesta oma email ja saadame sulle lingi parooli taastamiseks",
+      "email": "Email",
+      "sendLink": "Saada taastamise link",
+      "sending": "Saadan...",
+      "success": "Kontrolli oma e-posti parooli taastamise lingi jaoks",
+      "rememberPassword": "Mäletad oma parooli?",
+      "backToLogin": "Tagasi sisselogimise juurde"
+    },
     "errors": {
       "invalidCredentials": "Vale email või parool",
       "emailInUse": "Email on juba kasutusel",
