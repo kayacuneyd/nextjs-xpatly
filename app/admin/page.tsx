@@ -2,6 +2,10 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
+// Disable caching to always show latest stats
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 async function getStats() {
   const supabase = await createClient()
 
@@ -67,33 +71,33 @@ export default async function AdminDashboard() {
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+        <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
           Overview of your platform activity and moderation queue
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {statCards.map((stat) => (
           <Link
             key={stat.title}
             href={stat.href}
-            className={`bg-white rounded-lg shadow p-6 hover:shadow-md transition ${
+            className={`bg-white rounded-lg shadow p-4 sm:p-6 hover:shadow-md transition ${
               stat.highlight ? 'ring-2 ring-orange-500' : ''
             }`}
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">{stat.title}</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</p>
               </div>
-              <div className="text-4xl">{stat.icon}</div>
+              <div className="text-2xl sm:text-4xl">{stat.icon}</div>
             </div>
             {stat.highlight && (
-              <div className="mt-3 text-sm text-orange-600 font-medium">
+              <div className="mt-2 sm:mt-3 text-xs sm:text-sm text-orange-600 font-medium">
                 Needs attention
               </div>
             )}
@@ -102,34 +106,34 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <Link href="/admin/listings">
-            <Button className="w-full" variant="outline">
+            <Button className="w-full text-sm sm:text-base" variant="outline">
               Review Pending Listings
             </Button>
           </Link>
           <Link href="/admin/flagged">
-            <Button className="w-full" variant="outline">
+            <Button className="w-full text-sm sm:text-base" variant="outline">
               Review Flagged Content
             </Button>
           </Link>
           <Link href="/admin/users">
-            <Button className="w-full" variant="outline">
+            <Button className="w-full text-sm sm:text-base" variant="outline">
               Manage Users
             </Button>
           </Link>
         </div>
       </div>
 
-      {/* Recent Activity */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Platform Health</h2>
+      {/* Platform Health */}
+      <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Platform Health</h2>
         <div className="space-y-3">
           <div className="flex items-center justify-between py-2 border-b">
-            <span className="text-gray-700">Approval Rate</span>
-            <span className="font-semibold">
+            <span className="text-sm sm:text-base text-gray-700">Approval Rate</span>
+            <span className="font-semibold text-sm sm:text-base">
               {stats.totalListings > 0
                 ? Math.round((stats.activeListings / stats.totalListings) * 100)
                 : 0}
@@ -137,14 +141,14 @@ export default async function AdminDashboard() {
             </span>
           </div>
           <div className="flex items-center justify-between py-2 border-b">
-            <span className="text-gray-700">Pending Queue</span>
-            <span className={`font-semibold ${stats.pendingListings > 5 ? 'text-orange-600' : 'text-green-600'}`}>
+            <span className="text-sm sm:text-base text-gray-700">Pending Queue</span>
+            <span className={`font-semibold text-sm sm:text-base ${stats.pendingListings > 5 ? 'text-orange-600' : 'text-green-600'}`}>
               {stats.pendingListings} listing{stats.pendingListings !== 1 ? 's' : ''}
             </span>
           </div>
           <div className="flex items-center justify-between py-2">
-            <span className="text-gray-700">Flagged Items</span>
-            <span className={`font-semibold ${stats.flaggedListings > 0 ? 'text-red-600' : 'text-green-600'}`}>
+            <span className="text-sm sm:text-base text-gray-700">Flagged Items</span>
+            <span className={`font-semibold text-sm sm:text-base ${stats.flaggedListings > 0 ? 'text-red-600' : 'text-green-600'}`}>
               {stats.flaggedListings} item{stats.flaggedListings !== 1 ? 's' : ''}
             </span>
           </div>
