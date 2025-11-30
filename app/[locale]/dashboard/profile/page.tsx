@@ -1,1 +1,2 @@
-export { default } from '@/app/dashboard/profile/page'
+export { default } from '@/app/dashboard/profile/page';
+

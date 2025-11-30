@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { useTranslations, useLocale } from 'next-intl'
 import { signOut } from '@/lib/auth/actions'
+import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 interface UserNavProps {
   user: {
