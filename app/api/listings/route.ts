@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { checkBlockedPhrases } from '@/lib/utils/validation'
 
 export async function POST(request: NextRequest) {
@@ -179,10 +179,10 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = await createClient()
+    const supabase = createAdminClient()
     const { searchParams } = new URL(request.url)
 
-    // Build query
+    // Build query - only show active listings to public
     let query = supabase
       .from('listings')
       .select(`
@@ -190,12 +190,9 @@ export async function GET(request: NextRequest) {
         listing_images (
           url,
           order
-        ),
-        users (
-          email
         )
       `)
-      .in('status', ['active', 'pending'])
+      .eq('status', 'active')
       .order('created_at', { ascending: false })
 
     // Apply filters
