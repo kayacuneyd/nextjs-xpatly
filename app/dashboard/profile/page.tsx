@@ -3,10 +3,10 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { UserNav } from '@/components/ui/user-nav'
 import { createClient } from '@/lib/supabase/client'
-import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
 
 type UserType = 'landlord' | 'tenant' | 'both'
 
