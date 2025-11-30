@@ -1,12 +1,13 @@
-import { pgTable, uuid, text, timestamp, boolean, integer, decimal, pgEnum } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
+import { boolean, decimal, integer, pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 // Enums
 export const userRoleEnum = pgEnum('user_role', ['super_admin', 'moderator', 'owner', 'user'])
+export const userTypeEnum = pgEnum('user_type', ['landlord', 'tenant', 'both'])
 export const propertyTypeEnum = pgEnum('property_type', ['apartment', 'house', 'room', 'studio'])
 export const listingStatusEnum = pgEnum('listing_status', ['draft', 'pending', 'active', 'rejected', 'archived'])
 export const notificationTypeEnum = pgEnum('notification_type', ['new_match', 'listing_approved', 'listing_rejected', 'admin_message'])
-export const adminActionTypeEnum = pgEnum('admin_action_type', ['approve_listing', 'reject_listing', 'ban_user', 'verify_user', 'delete_listing'])
+export const adminActionTypeEnum = pgEnum('admin_action_type', ['approve_listing', 'reject_listing', 'ban_user', 'verify_user', 'delete_listing', 'approve_user', 'reject_user'])
 export const flaggedActionEnum = pgEnum('flagged_action', ['approved', 'rejected'])
 
 // Users table (extends Supabase Auth)
@@ -14,7 +15,9 @@ export const users = pgTable('users', {
   id: uuid('id').primaryKey(), // Links to auth.users
   email: text('email').notNull().unique(),
   role: userRoleEnum('role').notNull().default('user'),
+  userType: userTypeEnum('user_type').notNull().default('tenant'),
   isVerified: boolean('is_verified').notNull().default(false),
+  isApproved: boolean('is_approved').notNull().default(false),
   isBanned: boolean('is_banned').notNull().default(false),
   createdAt: timestamp('created_at').notNull().defaultNow(),
 })

@@ -1,11 +1,14 @@
 // User types
 export type UserRole = 'super_admin' | 'moderator' | 'owner' | 'user'
+export type UserType = 'landlord' | 'tenant' | 'both'
 
 export interface User {
   id: string
   email: string
   role: UserRole
+  user_type: UserType
   is_verified: boolean
+  is_approved: boolean
   is_banned: boolean
   created_at: string
 }

@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import type { UserType } from '@/types'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -29,7 +30,9 @@ export async function signIn(email: string, password: string) {
         id: data.user.id,
         email: data.user.email || '',
         role: 'user',
+        user_type: 'tenant',
         is_verified: false,
+        is_approved: false,
         is_banned: false,
       })
     }
@@ -39,7 +42,7 @@ export async function signIn(email: string, password: string) {
   return { success: true, user: data.user }
 }
 
-export async function signUp(email: string, password: string) {
+export async function signUp(email: string, password: string, userType: UserType = 'tenant') {
   const supabase = await createClient()
 
   const { data, error } = await supabase.auth.signUp({
@@ -54,13 +57,15 @@ export async function signUp(email: string, password: string) {
     return { error: error.message }
   }
 
-  // Create user in users table
+  // Create user in users table with user type
   if (data.user) {
     await supabase.from('users').insert({
       id: data.user.id,
       email: data.user.email || '',
       role: 'user',
+      user_type: userType,
       is_verified: false,
+      is_approved: false,
       is_banned: false,
     })
   }

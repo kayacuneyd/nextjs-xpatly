@@ -122,7 +122,6 @@
       "contact": "Contact Owner",
       "listingId": "Listing ID: {id}",
       "noPhotos": "No photos uploaded yet.",
-      "area": "Area",
       "monthlyRent": "Monthly Rent",
       "features": "Features",
       "photos": "Photos",
@@ -217,7 +216,16 @@
       "withGoogle": "Sign up with Google",
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
-      "agree": "By signing up, you agree to our"
+      "agree": "By signing up, you agree to our",
+      "userType": {
+        "label": "I am a...",
+        "tenant": "Tenant",
+        "tenantDescription": "Looking for a place to rent",
+        "landlord": "Landlord",
+        "landlordDescription": "I have property to rent",
+        "both": "Both",
+        "bothDescription": "Renting and listing"
+      }
     },
     "forgotPassword": {
       "title": "Reset your password",
@@ -277,15 +285,28 @@
       "title": "User Management",
       "subtitle": "Manage user accounts, roles, and permissions",
       "user": "User",
+      "type": "Type",
       "role": "Role",
       "status": "Status",
       "listings": "Listings",
       "joined": "Joined",
       "actions": "Actions",
       "verify": "Verify",
+      "verified": "Verified",
+      "approve": "Approve",
+      "reject": "Reject",
+      "approved": "Approved",
+      "pending": "Pending",
+      "pendingApproval": "Pending Approval",
       "ban": "Ban",
       "unban": "Unban",
+      "banned": "Banned",
       "changeRole": "Role ▼",
+      "userTypes": {
+        "tenant": "Tenant",
+        "landlord": "Landlord",
+        "both": "Both"
+      },
       "roles": {
         "user": "User",
         "owner": "Owner",
@@ -295,8 +316,12 @@
       "statusBadges": {
         "verified": "Verified",
         "banned": "Banned",
-        "unverified": "Unverified"
-      }
+        "unverified": "Unverified",
+        "approved": "Approved",
+        "pending": "Pending"
+      },
+      "noUsers": "No users yet",
+      "noUsersDescription": "Users will appear here once they register."
     }
   }
 }

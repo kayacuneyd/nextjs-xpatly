@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { signInWithGoogle, signUp } from '@/lib/auth/actions'
 import { registerSchema } from '@/lib/utils/validation'
+import type { UserType } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -23,6 +24,7 @@ export function RegisterForm() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [userType, setUserType] = useState<UserType>('tenant')
 
   const {
     register,
@@ -38,7 +40,7 @@ export function RegisterForm() {
     setError(null)
     setSuccess(null)
 
-    const result = await signUp(data.email, data.password)
+    const result = await signUp(data.email, data.password, userType)
 
     if (result.error) {
       setError(result.error)
@@ -49,8 +51,8 @@ export function RegisterForm() {
         setSuccess(result.message || t('auth.register.success'))
         reset() // Clear form on success
       } else {
-        // User is auto-confirmed, redirect to home
-        router.push(`/${locale}`)
+        // User is auto-confirmed, redirect to listings page
+        router.push(`/${locale}/listings`)
         router.refresh()
       }
       setLoading(false)
@@ -88,6 +90,49 @@ export function RegisterForm() {
               {success}
             </div>
           )}
+
+          {/* User Type Selection */}
+          <div className="space-y-3">
+            <Label>{t('auth.register.userType.label')}</Label>
+            <div className="grid grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() => setUserType('tenant')}
+                className={`p-3 rounded-lg border-2 text-center transition-all ${
+                  userType === 'tenant'
+                    ? 'border-blue-600 bg-blue-50 text-blue-700'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <div className="text-2xl mb-1">🏠</div>
+                <div className="text-sm font-medium">{t('auth.register.userType.tenant')}</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserType('landlord')}
+                className={`p-3 rounded-lg border-2 text-center transition-all ${
+                  userType === 'landlord'
+                    ? 'border-blue-600 bg-blue-50 text-blue-700'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <div className="text-2xl mb-1">🔑</div>
+                <div className="text-sm font-medium">{t('auth.register.userType.landlord')}</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setUserType('both')}
+                className={`p-3 rounded-lg border-2 text-center transition-all ${
+                  userType === 'both'
+                    ? 'border-blue-600 bg-blue-50 text-blue-700'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <div className="text-2xl mb-1">🏡</div>
+                <div className="text-sm font-medium">{t('auth.register.userType.both')}</div>
+              </button>
+            </div>
+          </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">{t('auth.register.email')}</Label>
