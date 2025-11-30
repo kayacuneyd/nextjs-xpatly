@@ -8,7 +8,6 @@ import { signIn, signInWithGoogle } from '@/lib/auth/actions'
 import { loginSchema } from '@/lib/utils/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import type { z } from 'zod'
@@ -20,7 +19,6 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
-  const router = useRouter()
   const target = redirectTo || '/en'
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -45,11 +43,10 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
     } else {
       // Redirect admins to admin dashboard, regular users to their target
       if (result.role === 'super_admin' || result.role === 'moderator') {
-        router.push('/admin')
+        window.location.href = '/admin'
       } else {
-        router.push(target)
+        window.location.href = target
       }
-      router.refresh()
     }
   }
 
