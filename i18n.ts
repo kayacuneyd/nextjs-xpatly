@@ -15,12 +15,12 @@ export const localeNames: Record<Locale, string> = {
 }
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as Locale)) {
-    locale = defaultLocale
-  }
+  const normalizedLocale = locales.includes(locale as Locale)
+    ? (locale as Locale)
+    : defaultLocale
 
   const messages = await (async () => {
-    switch (locale) {
+    switch (normalizedLocale) {
       case 'en':
         return (await import('./messages/en.json')).default
       case 'et':
@@ -32,5 +32,5 @@ export default getRequestConfig(async ({ locale }) => {
     }
   })()
 
-  return { messages, locale }
+  return { messages, locale: normalizedLocale }
 })
