@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
-    pathname.match(/\\.(svg|png|jpg|jpeg|gif|webp)$/)
+    pathname.match(/\.(svg|png|jpg|jpeg|gif|webp)$/)
   ) {
     return NextResponse.next()
   }
@@ -26,15 +26,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Update Supabase session - this returns a response with updated cookies
   const supabaseResponse = await updateSession(request)
-  const response = NextResponse.next()
-
+  
+  // Set locale cookie on the supabase response
   if (supabaseResponse) {
-    supabaseResponse.cookies.getAll().forEach((cookie) => {
-      response.cookies.set(cookie)
-    })
+    supabaseResponse.cookies.set('NEXT_LOCALE', maybeLocale, { path: '/' })
+    return supabaseResponse
   }
 
+  // Fallback
+  const response = NextResponse.next()
   response.cookies.set('NEXT_LOCALE', maybeLocale, { path: '/' })
   return response
 }

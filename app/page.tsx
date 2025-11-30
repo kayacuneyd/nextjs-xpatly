@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { getLocale, getTranslations } from 'next-intl/server'
-import { getUser } from '@/lib/auth/actions'
-import { UserNav } from '@/components/ui/user-nav'
-import { Button } from '@/components/ui/button'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { Button } from '@/components/ui/button'
+import { UserNav } from '@/components/ui/user-nav'
+import { getUser } from '@/lib/auth/actions'
+import { getLocale, getTranslations } from 'next-intl/server'
+import Link from 'next/link'
 
 export default async function Home() {
   const t = await getTranslations()
@@ -103,7 +103,7 @@ export default async function Home() {
                       </Button>
                     </Link>
                     <Link href={`/${locale}/create-listing`}>
-                      <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 py-6 text-lg border-2 border-gray-200 hover:border-gray-300 rounded-xl">
+                      <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 py-6 text-lg border-2 border-gray-300 text-gray-900 hover:border-gray-400 hover:bg-gray-50 rounded-xl">
                         ➕ {t('nav.createListing')}
                       </Button>
                     </Link>
@@ -116,7 +116,7 @@ export default async function Home() {
                       </Button>
                     </Link>
                     <Link href={`/${locale}/listings`}>
-                      <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 py-6 text-lg border-2 border-gray-200 hover:border-gray-300 rounded-xl">
+                      <Button size="lg" variant="outline" className="w-full sm:w-auto px-8 py-6 text-lg border-2 border-gray-300 text-gray-900 hover:border-gray-400 hover:bg-gray-50 rounded-xl">
                         👀 {t('home.cta.browse')}
                       </Button>
                     </Link>
