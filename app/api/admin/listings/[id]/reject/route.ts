@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 
 export async function POST(
   request: NextRequest,
@@ -8,6 +8,7 @@ export async function POST(
   try {
     const { id } = await params
     const supabase = await createClient()
+    const adminSupabase = createAdminClient()
 
     // Check authentication
     const {
@@ -18,8 +19,8 @@ export async function POST(
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
     }
 
-    // Check if user is admin
-    const { data: userData } = await supabase
+    // Check if user is admin (use admin client to bypass RLS)
+    const { data: userData } = await adminSupabase
       .from('users')
       .select('role, is_banned')
       .eq('id', user.id)
@@ -43,8 +44,8 @@ export async function POST(
       )
     }
 
-    // Update listing status to rejected
-    const { data: listing, error: updateError } = await supabase
+    // Update listing status to rejected (use admin client)
+    const { data: listing, error: updateError } = await adminSupabase
       .from('listings')
       .update({
         status: 'rejected',
@@ -64,7 +65,7 @@ export async function POST(
     }
 
     // Log admin action
-    await supabase.from('admin_actions').insert({
+    await adminSupabase.from('admin_actions').insert({
       admin_id: user.id,
       action: 'reject_listing',
       target_type: 'listing',
