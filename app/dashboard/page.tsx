@@ -1,7 +1,6 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { UserNav } from '@/components/ui/user-nav'
 import { createClient } from '@/lib/supabase/server'
-import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -92,8 +91,7 @@ function getUserTypeLabel(userType: string) {
 
 export default async function DashboardPage() {
   const { user, profile, listings } = await getUserData()
-  const t = await getTranslations()
-  const locale = await getLocale()
+  const locale = 'en' // Default locale for non-locale routes
 
   if (!user) {
     redirect('/login')
@@ -119,10 +117,10 @@ export default async function DashboardPage() {
 
           <nav className="hidden md:flex items-center gap-8">
             <Link href={`/${locale}/listings`} className="text-gray-600 hover:text-gray-900 font-medium transition">
-              {t('nav.listings')}
+              Listings
             </Link>
             <Link href={`/${locale}/about`} className="text-gray-600 hover:text-gray-900 font-medium transition">
-              {t('nav.about')}
+              About
             </Link>
           </nav>
 
@@ -381,7 +379,7 @@ export default async function DashboardPage() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-sm">
-            <p>{t('common.footer')}</p>
+            <p>© 2025 Xpatly. All rights reserved.</p>
           </div>
         </div>
       </footer>

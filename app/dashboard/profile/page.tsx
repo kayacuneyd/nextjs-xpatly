@@ -3,7 +3,6 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { UserNav } from '@/components/ui/user-nav'
 import { createClient } from '@/lib/supabase/client'
-import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
@@ -13,7 +12,6 @@ type UserType = 'landlord' | 'tenant' | 'both'
 export default function ProfilePage() {
   const router = useRouter()
   const pathname = usePathname()
-  const t = useTranslations()
   const locale = pathname?.split('/')[1] || 'en'
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -148,10 +146,10 @@ export default function ProfilePage() {
 
           <nav className="hidden md:flex items-center gap-8">
             <Link href={`/${locale}/listings`} className="text-gray-600 hover:text-gray-900 font-medium transition">
-              {t('nav.listings')}
+              Listings
             </Link>
             <Link href={`/${locale}/about`} className="text-gray-600 hover:text-gray-900 font-medium transition">
-              {t('nav.about')}
+              About
             </Link>
           </nav>
 
@@ -397,7 +395,7 @@ export default function ProfilePage() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-sm">
-            <p>{t('common.footer')}</p>
+            <p>© 2025 Xpatly. All rights reserved.</p>
           </div>
         </div>
       </footer>
