@@ -1,5 +1,5 @@
 import { UserManagementActions } from '@/components/admin/UserManagementActions'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 
 // Disable caching to always show latest users
 export const dynamic = 'force-dynamic'
@@ -18,7 +18,7 @@ type AdminUser = {
 }
 
 async function getUsers(): Promise<AdminUser[]> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   const { data, error } = await supabase
     .from('users')

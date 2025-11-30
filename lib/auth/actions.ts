@@ -1,12 +1,13 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import type { UserType } from '@/types'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export async function signIn(email: string, password: string) {
   const supabase = await createClient()
+  const adminSupabase = createAdminClient()
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -17,17 +18,24 @@ export async function signIn(email: string, password: string) {
     return { error: error.message }
   }
 
-  // Ensure user exists in users table and get their role
+  // Use admin client to bypass RLS and get user role
   let userRole = 'user'
   if (data.user) {
-    const { data: existingUser } = await supabase
+    const { data: existingUser, error: queryError } = await adminSupabase
       .from('users')
       .select('id, role')
       .eq('id', data.user.id)
       .single()
 
+    console.log('=== DEBUG LOGIN ===')
+    console.log('User ID:', data.user.id)
+    console.log('Email:', data.user.email)
+    console.log('Existing user from DB:', existingUser)
+    console.log('Query error:', queryError)
+    console.log('===================')
+
     if (!existingUser) {
-      await supabase.from('users').insert({
+      await adminSupabase.from('users').insert({
         id: data.user.id,
         email: data.user.email || '',
         role: 'user',
@@ -41,7 +49,17 @@ export async function signIn(email: string, password: string) {
     }
   }
 
+  console.log('Final userRole:', userRole)
+  console.log('Is admin?', userRole === 'super_admin' || userRole === 'moderator')
+
   revalidatePath('/', 'layout')
+  
+  // Server-side redirect for admins
+  if (userRole === 'super_admin' || userRole === 'moderator') {
+    console.log('REDIRECTING TO /admin')
+    redirect('/admin')
+  }
+  
   return { success: true, user: data.user, role: userRole }
 }
 

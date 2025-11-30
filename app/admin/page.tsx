@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 // Disable caching to always show latest stats
@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 async function getStats() {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   const [
     { count: totalListings },

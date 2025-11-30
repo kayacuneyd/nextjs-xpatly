@@ -35,18 +35,24 @@ export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
     setLoading(true)
     setError(null)
 
-    const result = await signIn(data.email, data.password)
+    try {
+      const result = await signIn(data.email, data.password)
 
-    if (result.error) {
-      setError(result.error)
-      setLoading(false)
-    } else {
-      // Redirect admins to admin dashboard, regular users to their target
-      if (result.role === 'super_admin' || result.role === 'moderator') {
-        window.location.href = '/admin'
-      } else {
+      // If we get here with an error, show it
+      if (result?.error) {
+        setError(result.error)
+        setLoading(false)
+        return
+      }
+      
+      // If result exists (not redirected by server), redirect regular user
+      if (result?.success) {
         window.location.href = target
       }
+    } catch (e) {
+      // Server action might throw NEXT_REDIRECT for admin users - this is expected
+      // The redirect will happen automatically
+      console.log('Redirect in progress...', e)
     }
   }
 

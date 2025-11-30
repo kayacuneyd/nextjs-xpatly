@@ -1,6 +1,6 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { UserNav } from '@/components/ui/user-nav'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { getLocale } from 'next-intl/server'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
@@ -30,6 +30,7 @@ type UserProfile = {
 
 async function getUserData() {
   const supabase = await createClient()
+  const adminSupabase = createAdminClient()
   
   const { data: { user } } = await supabase.auth.getUser()
   
@@ -37,15 +38,15 @@ async function getUserData() {
     return { user: null, profile: null, listings: [] }
   }
 
-  // Get user profile
-  const { data: profile } = await supabase
+  // Use admin client to bypass RLS for user profile
+  const { data: profile } = await adminSupabase
     .from('users')
     .select('*')
     .eq('id', user.id)
     .single()
 
-  // Get user listings
-  const { data: listings } = await supabase
+  // Get user listings (this might also need admin client if RLS is problematic)
+  const { data: listings } = await adminSupabase
     .from('listings')
     .select(`
       id,

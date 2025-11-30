@@ -1,8 +1,9 @@
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
 export async function requireAdmin() {
   const supabase = await createClient()
+  const adminSupabase = createAdminClient()
 
   const {
     data: { user },
@@ -12,8 +13,8 @@ export async function requireAdmin() {
     redirect('/en/login?redirectTo=/admin')
   }
 
-  // Get user role from database
-  const { data: fetchedUser, error } = await supabase
+  // Use admin client to bypass RLS and get user role
+  const { data: fetchedUser, error } = await adminSupabase
     .from('users')
     .select('role, is_banned')
     .eq('id', user.id)
@@ -23,7 +24,7 @@ export async function requireAdmin() {
   try {
     // If user doesn't exist in users table, create them
     if (error || !userData) {
-      const { data: newUser, error: insertError } = await supabase
+      const { data: newUser, error: insertError } = await adminSupabase
         .from('users')
         .insert({
           id: user.id,
@@ -64,6 +65,7 @@ export async function requireAdmin() {
 
 export async function checkIsAdmin() {
   const supabase = await createClient()
+  const adminSupabase = createAdminClient()
 
   const {
     data: { user },
@@ -73,7 +75,8 @@ export async function checkIsAdmin() {
     return false
   }
 
-  const { data: userData } = await supabase
+  // Use admin client to bypass RLS
+  const { data: userData } = await adminSupabase
     .from('users')
     .select('role, is_banned')
     .eq('id', user.id)

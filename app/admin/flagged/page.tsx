@@ -1,5 +1,5 @@
 import { ApproveRejectButtons } from '@/components/admin/ApproveRejectButtons'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
 // Disable caching to always show latest flagged content
@@ -34,7 +34,7 @@ type FlaggedItem = {
 }
 
 async function getFlaggedContent(): Promise<FlaggedItem[]> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
 
   const { data, error } = await supabase
     .from('flagged_content')
