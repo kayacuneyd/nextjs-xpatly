@@ -216,7 +216,16 @@
       "withGoogle": "Registreeru Google'iga",
       "terms": "Kasutustingimused",
       "privacy": "Privaatsuspoliitika",
-      "agree": "Registreerudes nõustud meiega"
+      "agree": "Registreerudes nõustud meiega",
+      "userType": {
+        "label": "Ma olen...",
+        "tenant": "Üürnik",
+        "tenantDescription": "Otsin üürikorterit",
+        "landlord": "Majaomanik",
+        "landlordDescription": "Mul on kinnisvara üürida",
+        "both": "Mõlemad",
+        "bothDescription": "Üürin ja annan välja"
+      }
     },
     "forgotPassword": {
       "title": "Taasta oma parool",
