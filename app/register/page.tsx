@@ -1,12 +1,14 @@
+import { redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
 import { RegisterForm } from '@/components/forms/register-form'
 import { getUser } from '@/lib/auth/actions'
-import { redirect } from 'next/navigation'
 
 export default async function RegisterPage() {
   // If already logged in, redirect to home
   const user = await getUser()
+  const locale = await getLocale()
   if (user) {
-    redirect('/')
+    redirect(`/${locale}`)
   }
 
   return (

@@ -3,20 +3,28 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations, useLocale } from 'next-intl'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { loginSchema } from '@/lib/utils/validation'
 import { signIn, signInWithGoogle } from '@/lib/auth/actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import type { z } from 'zod'
 
 type LoginFormData = z.infer<typeof loginSchema>
 
-export function LoginForm() {
+interface LoginFormProps {
+  redirectTo?: string
+}
+
+export function LoginForm({ redirectTo = '/' }: LoginFormProps) {
   const router = useRouter()
+  const t = useTranslations()
+  const locale = useLocale()
+  const target = redirectTo || `/${locale}`
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -38,7 +46,7 @@ export function LoginForm() {
       setError(result.error)
       setLoading(false)
     } else {
-      router.push('/')
+      router.push(target)
       router.refresh()
     }
   }
@@ -58,8 +66,8 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-2xl">Welcome back</CardTitle>
-        <CardDescription>Sign in to your Xpatly account</CardDescription>
+        <CardTitle className="text-2xl">{t('auth.login.title')}</CardTitle>
+        <CardDescription>{t('auth.login.subtitle')}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -70,7 +78,7 @@ export function LoginForm() {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('auth.login.email')}</Label>
             <Input
               id="email"
               type="email"
@@ -85,12 +93,12 @@ export function LoginForm() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('auth.login.password')}</Label>
               <Link
-                href="/forgot-password"
+                href={`/${locale}/forgot-password`}
                 className="text-sm text-slate-600 hover:text-slate-900"
               >
-                Forgot password?
+                {t('auth.login.forgotPassword')}
               </Link>
             </div>
             <Input
@@ -106,7 +114,7 @@ export function LoginForm() {
           </div>
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign in'}
+            {loading ? t('auth.login.signingIn') : t('auth.login.signIn')}
           </Button>
         </form>
 
@@ -115,7 +123,7 @@ export function LoginForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-slate-500">Or continue with</span>
+            <span className="bg-white px-2 text-slate-500">{t('auth.login.orContinueWith')}</span>
           </div>
         </div>
 
@@ -144,14 +152,14 @@ export function LoginForm() {
               fill="#EA4335"
             />
           </svg>
-          Sign in with Google
+          {t('auth.login.signInWithGoogle')}
         </Button>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
         <div className="text-sm text-center text-slate-600">
-          Don't have an account?{' '}
-          <Link href="/register" className="text-slate-900 font-medium hover:underline">
-            Sign up
+          {t('auth.login.noAccount')}{' '}
+          <Link href={`/${locale}/register`} className="text-slate-900 font-medium hover:underline">
+            {t('auth.login.signUp')}
           </Link>
         </div>
       </CardFooter>

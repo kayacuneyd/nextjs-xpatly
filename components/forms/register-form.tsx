@@ -3,18 +3,21 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useLocale, useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { registerSchema } from '@/lib/utils/validation'
 import { signUp, signInWithGoogle } from '@/lib/auth/actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
 import type { z } from 'zod'
 
 type RegisterFormData = z.infer<typeof registerSchema>
 
 export function RegisterForm() {
+  const t = useTranslations()
+  const locale = useLocale()
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -38,7 +41,7 @@ export function RegisterForm() {
       setError(result.error)
       setLoading(false)
     } else {
-      setSuccess(result.message || 'Account created successfully! Please check your email.')
+      setSuccess(result.message || t('auth.register.success'))
       setLoading(false)
     }
   }
@@ -58,8 +61,8 @@ export function RegisterForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-2xl">Create an account</CardTitle>
-        <CardDescription>Get started with Xpatly today</CardDescription>
+        <CardTitle className="text-2xl">{t('auth.register.title')}</CardTitle>
+        <CardDescription>{t('auth.register.subtitle')}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -76,7 +79,7 @@ export function RegisterForm() {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('auth.register.email')}</Label>
             <Input
               id="email"
               type="email"
@@ -90,7 +93,7 @@ export function RegisterForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">{t('auth.register.password')}</Label>
             <Input
               id="password"
               type="password"
@@ -102,12 +105,12 @@ export function RegisterForm() {
               <p className="text-red-600 text-sm">{errors.password.message}</p>
             )}
             <p className="text-xs text-slate-500">
-              Must be at least 8 characters with uppercase, lowercase, and number
+              {t('auth.register.passwordHint')}
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Label htmlFor="confirmPassword">{t('auth.register.confirmPassword')}</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -121,7 +124,7 @@ export function RegisterForm() {
           </div>
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Creating account...' : 'Create account'}
+            {loading ? t('auth.register.creating') : t('auth.register.createAccount')}
           </Button>
         </form>
 
@@ -130,7 +133,7 @@ export function RegisterForm() {
             <span className="w-full border-t" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-slate-500">Or continue with</span>
+            <span className="bg-white px-2 text-slate-500">{t('auth.login.orContinueWith')}</span>
           </div>
         </div>
 
@@ -159,24 +162,24 @@ export function RegisterForm() {
               fill="#EA4335"
             />
           </svg>
-          Sign up with Google
+          {t('auth.register.withGoogle')}
         </Button>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
         <div className="text-sm text-center text-slate-600">
-          Already have an account?{' '}
-          <Link href="/login" className="text-slate-900 font-medium hover:underline">
-            Sign in
+          {t('auth.register.hasAccount')}{' '}
+          <Link href={`/${locale}/login`} className="text-slate-900 font-medium hover:underline">
+            {t('auth.register.signIn')}
           </Link>
         </div>
         <div className="text-xs text-center text-slate-500">
-          By signing up, you agree to our{' '}
-          <Link href="/terms" className="underline">
-            Terms of Service
+          {t('auth.register.agree')}{' '}
+          <Link href={`/${locale}/terms`} className="underline">
+            {t('auth.register.terms')}
           </Link>{' '}
           and{' '}
-          <Link href="/privacy" className="underline">
-            Privacy Policy
+          <Link href={`/${locale}/privacy`} className="underline">
+            {t('auth.register.privacy')}
           </Link>
         </div>
       </CardFooter>

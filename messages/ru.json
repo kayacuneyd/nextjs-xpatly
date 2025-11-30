@@ -1,0 +1,284 @@
+{
+  "common": {
+    "appName": "Xpatly",
+    "language": "Язык",
+    "yes": "Да",
+    "no": "Нет",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "clear": "Очистить",
+    "apply": "Применить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "footer": "© 2025 Xpatly. Боремся с дискриминацией на рынке жилья в Эстонии."
+  },
+  "nav": {
+    "home": "Главная",
+    "listings": "Объявления",
+    "myListings": "Мои объявления",
+    "createListing": "Добавить объявление",
+    "about": "О нас",
+    "terms": "Условия",
+    "privacy": "Конфиденциальность",
+    "admin": "Админ-панель",
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "profile": "Профиль"
+  },
+  "home": {
+    "hero": {
+      "title": "Найдите жилье, дружелюбное к экспатам, в {country}",
+      "country": "Эстонии",
+      "subtitle": "Просматривайте проверенные объявления без дискриминации. Жилье для всех.",
+      "searchPlaceholder": "Поиск по городу, району...",
+      "browseButton": "Смотреть объявления"
+    },
+    "cta": {
+      "getStarted": "Начать",
+      "browse": "Смотреть объявления"
+    },
+    "features": {
+      "title": "Почему Xpatly?",
+      "expatFriendly": {
+        "title": "Обязательство дружелюбия к экспатам",
+        "description": "Все объявления проверяются, чтобы исключить дискриминацию иностранцев"
+      },
+      "verified": {
+        "title": "Проверенные объявления",
+        "description": "Каждое объявление модерируется нашей командой перед публикацией"
+      },
+      "multiLanguage": {
+        "title": "Поддержка нескольких языков",
+        "description": "Просматривайте на английском, эстонском или русском — выбирайте сами"
+      }
+    },
+    "welcome": {
+      "title": "С возвращением, {email}!",
+      "subtitle": "Ваш аккаунт готов. Начните просматривать объявления или создайте свое."
+    }
+  },
+  "listings": {
+    "title": "Объявления",
+    "subtitle": "Найдите идеальное жилье, дружелюбное к экспатам, в Эстонии",
+    "found": "Найдено {count} объявлений",
+    "loading": "Загрузка объявлений...",
+    "noListings": "Объявлений не найдено",
+    "noListingsDescription": "Попробуйте изменить фильтры или зайдите позже за новыми объявлениями",
+    "createFirst": "Создать первое объявление",
+    "viewModes": {
+      "grid": "Сетка",
+      "map": "Карта"
+    },
+    "filters": {
+      "title": "Фильтры",
+      "city": "Город",
+      "propertyType": "Тип недвижимости",
+      "priceRange": "Ценовой диапазон",
+      "minPrice": "Мин. цена",
+      "maxPrice": "Макс. цена",
+      "bedrooms": "Спальни",
+      "furnished": "Меблированное",
+      "expatFriendly": "Дружелюбно к экспатам",
+      "clearFilters": "Сбросить фильтры",
+      "showMore": "Показать больше",
+      "showLess": "Показать меньше",
+      "allCities": "Все города",
+      "priceHint": "Ценовой диапазон (€/месяц)",
+      "minBedrooms": "Минимум спален",
+      "any": "Любое"
+    },
+    "propertyTypes": {
+      "all": "Все типы",
+      "apartment": "Квартира",
+      "house": "Дом",
+      "room": "Комната",
+      "studio": "Студия"
+    },
+    "details": {
+      "price": "€{price}/месяц",
+      "priceLabel": "Цена",
+      "areaLabel": "Площадь",
+      "bedroomsLabel": "Спальни",
+      "bathroomsLabel": "Ванные",
+      "bedrooms": "{count} спальн.",
+      "bathrooms": "{count} ванн.",
+      "area": "{sqm} м²",
+      "furnished": "Меблированное",
+      "expatFriendly": "Дружелюбно к экспатам",
+      "description": "Описание",
+      "details": "Детали",
+      "propertyType": "Тип недвижимости",
+      "backToListings": "← Назад к объявлениям",
+      "watchVideo": "Смотреть видео-тур",
+      "contact": "Связаться с владельцем",
+      "listingId": "ID объявления: {id}",
+      "noPhotos": "Фото еще не загружены.",
+      "area": "Площадь",
+      "monthlyRent": "Ежемесячная аренда",
+      "features": "Характеристики",
+      "photos": "Фото",
+      "address": "Адрес",
+      "status": {
+        "pending": "В ожидании",
+        "active": "Активно",
+        "rejected": "Отклонено",
+        "archived": "Архивировано"
+      }
+    }
+  },
+  "map": {
+    "loading": "Карта загружается..."
+  },
+  "listingCard": {
+    "furnished": "Меблированное",
+    "expatFriendly": "Дружелюбно к экспатам",
+    "perMonth": "/месяц",
+    "bed": "{count} спальн.",
+    "bath": "{count} ванн."
+  },
+  "createListing": {
+    "pageTitle": "Создать новое объявление",
+    "pageSubtitle": "Разместите недвижимость и свяжитесь с экспатами, ищущими жилье",
+    "steps": ["Категория", "Адрес", "Детали", "Медиа", "Цена", "Доступность", "Предпросмотр"],
+    "categoryTitle": "Выберите тип недвижимости",
+    "addressTitle": "Адрес недвижимости",
+    "detailsTitle": "Детали недвижимости",
+    "mediaTitle": "Фото и видео",
+    "pricingTitle": "Цена",
+    "availabilityTitle": "Доступность",
+    "previewTitle": "Проверьте свое объявление",
+    "propertyType": "Тип недвижимости",
+    "title": "Заголовок",
+    "titlePlaceholder": "например, Современная 2-комнатная квартира в центре Таллина",
+    "description": "Описание",
+    "descriptionPlaceholder": "Подробно опишите вашу недвижимость...",
+    "bedrooms": "Спальни",
+    "bathrooms": "Ванные",
+    "area": "Площадь (м²)",
+    "furnished": "Меблированное",
+    "expatFriendly": "Обязательство дружелюбия к экспатам",
+    "images": "Изображения",
+    "youtube": "Ссылка YouTube (необязательно)",
+    "monthlyRent": "Ежемесячная аренда (€)",
+    "availableFrom": "Доступно с",
+    "features": "Характеристики",
+    "publish": "Опубликовать объявление",
+    "creating": "Создаем...",
+    "back": "Назад",
+    "next": "Далее",
+    "preview": {
+      "monthlyRent": "Ежемесячная аренда",
+      "address": "Адрес"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "С возвращением",
+      "subtitle": "Войдите в свой аккаунт Xpatly",
+      "email": "Email",
+      "password": "Пароль",
+      "forgotPassword": "Забыли пароль?",
+      "signIn": "Войти",
+      "signingIn": "Вход...",
+      "orContinueWith": "Или продолжить с",
+      "signInWithGoogle": "Войти через Google",
+      "noAccount": "Нет аккаунта?",
+      "signUp": "Зарегистрироваться"
+    },
+    "register": {
+      "title": "Создать аккаунт",
+      "subtitle": "Присоединяйтесь к Xpatly и найдите свой дом",
+      "email": "Email",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "createAccount": "Создать аккаунт",
+      "creating": "Создание...",
+      "hasAccount": "Уже есть аккаунт?",
+      "signIn": "Войти",
+      "passwordHint": "Минимум 8 символов, с заглавными, строчными буквами и цифрами",
+      "success": "Аккаунт создан! Проверьте вашу почту.",
+      "withGoogle": "Зарегистрироваться через Google",
+      "terms": "Условия использования",
+      "privacy": "Политика конфиденциальности",
+      "agree": "Регистрируясь, вы соглашаетесь с нашими"
+    },
+    "errors": {
+      "invalidCredentials": "Неверный email или пароль",
+      "emailInUse": "Email уже используется",
+      "weakPassword": "Пароль слишком слабый",
+      "generic": "Произошла ошибка. Попробуйте еще раз."
+    }
+  },
+  "admin": {
+    "title": "Админ-панель",
+    "dashboard": {
+      "title": "Панель",
+      "totalListings": "Всего объявлений",
+      "pendingListings": "Объявления в ожидании",
+      "activeListings": "Активные объявления",
+      "flaggedContent": "Помеченный контент",
+      "totalUsers": "Всего пользователей",
+      "needsAttention": "Требует внимания"
+    },
+    "navigation": {
+      "dashboard": "Панель",
+      "pendingListings": "В ожидании",
+      "flaggedContent": "Помеченный контент",
+      "users": "Пользователи"
+    },
+    "listings": {
+      "title": "Объявления в ожидании",
+      "subtitle": "Проверьте и модерируйте объявления, ожидающие одобрения",
+      "allCaughtUp": "Все готово!",
+      "noPending": "Сейчас нет объявлений, ожидающих проверки.",
+      "approve": "Одобрить",
+      "reject": "Отклонить",
+      "approving": "Одобряем...",
+      "confirmRejection": "Подтвердить отклонение",
+      "rejectionReason": "Укажите причину отклонения (будет показана пользователю)",
+      "postedBy": "Разместил: {email}",
+      "alreadyReviewed": "Уже {status}"
+    },
+    "flagged": {
+      "title": "Помеченный контент",
+      "subtitle": "Проверьте объявления, помеченные системой Expat-Friendly Pledge",
+      "flagged": "Помечено: {reason}",
+      "detectedPhrase": "Обнаруженная фраза: \"{phrase}\"",
+      "flaggedOn": "Помечено {date}"
+    },
+    "users": {
+      "title": "Управление пользователями",
+      "subtitle": "Управляйте аккаунтами, ролями и правами",
+      "user": "Пользователь",
+      "role": "Роль",
+      "status": "Статус",
+      "listings": "Объявления",
+      "joined": "Присоединился",
+      "actions": "Действия",
+      "verify": "Подтвердить",
+      "ban": "Заблокировать",
+      "unban": "Разблокировать",
+      "changeRole": "Роль ▼",
+      "roles": {
+        "user": "Пользователь",
+        "owner": "Владелец",
+        "moderator": "Модератор",
+        "super_admin": "Суперадмин"
+      },
+      "statusBadges": {
+        "verified": "Подтвержден",
+        "banned": "Заблокирован",
+        "unverified": "Не подтвержден"
+      }
+    }
+  }
+}

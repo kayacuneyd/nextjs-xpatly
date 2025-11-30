@@ -1,9 +1,9 @@
 'use client'
 
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { signOut } from '@/lib/auth/actions'
 import { Button } from './button'
-import { useState } from 'react'
-import Link from 'next/link'
 
 interface UserNavProps {
   user: {
@@ -13,6 +13,7 @@ interface UserNavProps {
 
 export function UserNav({ user }: UserNavProps) {
   const [loading, setLoading] = useState(false)
+  const t = useTranslations()
 
   const handleSignOut = async () => {
     setLoading(true)
@@ -28,7 +29,7 @@ export function UserNav({ user }: UserNavProps) {
         onClick={handleSignOut}
         disabled={loading}
       >
-        {loading ? 'Signing out...' : 'Sign out'}
+        {loading ? t('common.loading') : t('nav.logout')}
       </Button>
     </div>
   )

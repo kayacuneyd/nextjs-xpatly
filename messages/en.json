@@ -1,0 +1,284 @@
+{
+  "common": {
+    "appName": "Xpatly",
+    "language": "Language",
+    "yes": "Yes",
+    "no": "No",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "footer": "© 2025 Xpatly. Fighting housing discrimination in Estonia."
+  },
+  "nav": {
+    "home": "Home",
+    "listings": "Browse Listings",
+    "myListings": "My Listings",
+    "createListing": "Create Listing",
+    "about": "About",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "home": {
+    "hero": {
+      "title": "Find Your Expat-Friendly Home in {country}",
+      "country": "Estonia",
+      "subtitle": "Browse verified listings without discrimination. Housing for everyone.",
+      "searchPlaceholder": "Search by city, district...",
+      "browseButton": "Browse Listings"
+    },
+    "cta": {
+      "getStarted": "Get Started",
+      "browse": "Browse Listings"
+    },
+    "features": {
+      "title": "Why Choose Xpatly?",
+      "expatFriendly": {
+        "title": "Expat-Friendly Pledge",
+        "description": "All listings are reviewed to ensure no discrimination against foreigners"
+      },
+      "verified": {
+        "title": "Verified Listings",
+        "description": "Every listing is moderated by our team before going live"
+      },
+      "multiLanguage": {
+        "title": "Multi-Language Support",
+        "description": "Browse in English, Estonian, or Russian - your choice"
+      }
+    },
+    "welcome": {
+      "title": "Welcome back, {email}!",
+      "subtitle": "Your account is ready. Start browsing listings or create your own."
+    }
+  },
+  "listings": {
+    "title": "Browse Listings",
+    "subtitle": "Find your perfect expat-friendly home in Estonia",
+    "found": "Found {count} listing(s)",
+    "loading": "Loading listings...",
+    "noListings": "No listings found",
+    "noListingsDescription": "Try adjusting your filters or check back later for new listings",
+    "createFirst": "Create First Listing",
+    "viewModes": {
+      "grid": "Grid",
+      "map": "Map"
+    },
+    "filters": {
+      "title": "Filters",
+      "city": "City",
+      "propertyType": "Property Type",
+      "priceRange": "Price Range",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "bedrooms": "Bedrooms",
+      "furnished": "Furnished",
+      "expatFriendly": "Expat-Friendly",
+      "clearFilters": "Clear Filters",
+      "showMore": "Show more",
+      "showLess": "Show less",
+      "allCities": "All cities",
+      "priceHint": "Price Range (€/month)",
+      "minBedrooms": "Minimum Bedrooms",
+      "any": "Any"
+    },
+    "propertyTypes": {
+      "all": "All Types",
+      "apartment": "Apartment",
+      "house": "House",
+      "room": "Room",
+      "studio": "Studio"
+    },
+    "details": {
+      "price": "€{price}/month",
+      "priceLabel": "Price",
+      "areaLabel": "Area",
+      "bedroomsLabel": "Bedrooms",
+      "bathroomsLabel": "Bathrooms",
+      "bedrooms": "{count} bed",
+      "bathrooms": "{count} bath",
+      "area": "{sqm} m²",
+      "furnished": "Furnished",
+      "expatFriendly": "Expat-Friendly",
+      "description": "Description",
+      "details": "Details",
+      "propertyType": "Property type",
+      "backToListings": "← Back to listings",
+      "watchVideo": "Watch video tour",
+      "contact": "Contact Owner",
+      "listingId": "Listing ID: {id}",
+      "noPhotos": "No photos uploaded yet.",
+      "area": "Area",
+      "monthlyRent": "Monthly Rent",
+      "features": "Features",
+      "photos": "Photos",
+      "address": "Address",
+      "status": {
+        "pending": "Pending",
+        "active": "Active",
+        "rejected": "Rejected",
+        "archived": "Archived"
+      }
+    }
+  },
+  "map": {
+    "loading": "Loading map..."
+  },
+  "listingCard": {
+    "furnished": "Furnished",
+    "expatFriendly": "Expat-Friendly",
+    "perMonth": "/month",
+    "bed": "{count} bed",
+    "bath": "{count} bath"
+  },
+  "createListing": {
+    "pageTitle": "Create New Listing",
+    "pageSubtitle": "List your property and connect with expats looking for housing",
+    "steps": ["Category", "Address", "Details", "Media", "Pricing", "Availability", "Preview"],
+    "categoryTitle": "Select Property Type",
+    "addressTitle": "Property Address",
+    "detailsTitle": "Property Details",
+    "mediaTitle": "Photos & Video",
+    "pricingTitle": "Pricing",
+    "availabilityTitle": "Availability",
+    "previewTitle": "Review Your Listing",
+    "propertyType": "Property Type",
+    "title": "Title",
+    "titlePlaceholder": "e.g., Modern 2-bedroom apartment in Tallinn city center",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe your property in detail...",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "area": "Area (m²)",
+    "furnished": "Furnished",
+    "expatFriendly": "Expat-Friendly Pledge",
+    "images": "Images",
+    "youtube": "YouTube URL (Optional)",
+    "monthlyRent": "Monthly Rent (€)",
+    "availableFrom": "Available From",
+    "features": "Features",
+    "publish": "Publish Listing",
+    "creating": "Creating...",
+    "back": "Back",
+    "next": "Next",
+    "preview": {
+      "monthlyRent": "Monthly Rent",
+      "address": "Address"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your Xpatly account",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "signIn": "Sign in",
+      "signingIn": "Signing in...",
+      "orContinueWith": "Or continue with",
+      "signInWithGoogle": "Sign in with Google",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Join Xpatly and find your perfect home",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "createAccount": "Create Account",
+      "creating": "Creating...",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "passwordHint": "Must be at least 8 characters with uppercase, lowercase, and number",
+      "success": "Account created successfully! Please check your email.",
+      "withGoogle": "Sign up with Google",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "agree": "By signing up, you agree to our"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailInUse": "Email already in use",
+      "weakPassword": "Password is too weak",
+      "generic": "An error occurred. Please try again."
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "dashboard": {
+      "title": "Dashboard",
+      "totalListings": "Total Listings",
+      "pendingListings": "Pending Listings",
+      "activeListings": "Active Listings",
+      "flaggedContent": "Flagged Content",
+      "totalUsers": "Total Users",
+      "needsAttention": "Needs Attention"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "pendingListings": "Pending Listings",
+      "flaggedContent": "Flagged Content",
+      "users": "Users"
+    },
+    "listings": {
+      "title": "Pending Listings",
+      "subtitle": "Review and moderate listings waiting for approval",
+      "allCaughtUp": "All caught up!",
+      "noPending": "There are no pending listings to review at the moment.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "approving": "Approving...",
+      "confirmRejection": "Confirm Rejection",
+      "rejectionReason": "Please provide a reason for rejection (will be shown to the user)",
+      "postedBy": "Posted by: {email}",
+      "alreadyReviewed": "Already {status}"
+    },
+    "flagged": {
+      "title": "Flagged Content",
+      "subtitle": "Review listings flagged by the Expat-Friendly Pledge system",
+      "flagged": "Flagged: {reason}",
+      "detectedPhrase": "Detected phrase: \"{phrase}\"",
+      "flaggedOn": "Flagged on {date}"
+    },
+    "users": {
+      "title": "User Management",
+      "subtitle": "Manage user accounts, roles, and permissions",
+      "user": "User",
+      "role": "Role",
+      "status": "Status",
+      "listings": "Listings",
+      "joined": "Joined",
+      "actions": "Actions",
+      "verify": "Verify",
+      "ban": "Ban",
+      "unban": "Unban",
+      "changeRole": "Role ▼",
+      "roles": {
+        "user": "User",
+        "owner": "Owner",
+        "moderator": "Moderator",
+        "super_admin": "Super Admin"
+      },
+      "statusBadges": {
+        "verified": "Verified",
+        "banned": "Banned",
+        "unverified": "Unverified"
+      }
+    }
+  }
+}

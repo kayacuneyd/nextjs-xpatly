@@ -131,7 +131,7 @@ export async function getListingsByUserId(userId: string) {
 }
 
 export async function searchListings(filters: SearchFilters, page = 1, perPage = 20) {
-  let query = db.select().from(listings)
+  const query = db.select().from(listings)
 
   const conditions = [eq(listings.status, 'active')]
 

@@ -1,0 +1,284 @@
+{
+  "common": {
+    "appName": "Xpatly",
+    "language": "Keel",
+    "yes": "Jah",
+    "no": "Ei",
+    "search": "Otsi",
+    "filter": "Filtreeri",
+    "clear": "Puhasta",
+    "apply": "Rakenda",
+    "cancel": "Tühista",
+    "save": "Salvesta",
+    "delete": "Kustuta",
+    "edit": "Muuda",
+    "back": "Tagasi",
+    "next": "Järgmine",
+    "previous": "Eelmine",
+    "loading": "Laadimine...",
+    "error": "Viga",
+    "success": "Õnnestus",
+    "footer": "© 2025 Xpatly. Võitleme eluasemediskrimineerimise vastu Eestis."
+  },
+  "nav": {
+    "home": "Avaleht",
+    "listings": "Kuulutused",
+    "myListings": "Minu kuulutused",
+    "createListing": "Lisa kuulutus",
+    "about": "Meist",
+    "terms": "Tingimused",
+    "privacy": "Privaatsus",
+    "admin": "Admin paneel",
+    "login": "Logi sisse",
+    "register": "Loo konto",
+    "logout": "Logi välja",
+    "profile": "Profiil"
+  },
+  "home": {
+    "hero": {
+      "title": "Leia oma välismaalasesõbralik kodu {country}",
+      "country": "Eestis",
+      "subtitle": "Sirvi kontrollitud kuulutusi ilma diskrimineerimiseta. Kodu kõigile.",
+      "searchPlaceholder": "Otsi linna, linnaosa järgi...",
+      "browseButton": "Vaata kuulutusi"
+    },
+    "cta": {
+      "getStarted": "Alusta",
+      "browse": "Vaata kuulutusi"
+    },
+    "features": {
+      "title": "Miks valida Xpatly?",
+      "expatFriendly": {
+        "title": "Välismaalasesõbralik lubadus",
+        "description": "Kõik kuulutused vaadatakse üle, et vältida välismaalaste diskrimineerimist"
+      },
+      "verified": {
+        "title": "Kinnitatud kuulutused",
+        "description": "Iga kuulutus modereeritakse enne avaldamist"
+      },
+      "multiLanguage": {
+        "title": "Mitmekeelne tugi",
+        "description": "Sirvi inglise, eesti või vene keeles"
+      }
+    },
+    "welcome": {
+      "title": "Tere tulemast tagasi, {email}!",
+      "subtitle": "Sinu konto on valmis. Alusta kuulutuste sirvimist või loo oma."
+    }
+  },
+  "listings": {
+    "title": "Kuulutused",
+    "subtitle": "Leia ideaalne välismaalasesõbralik kodu Eestis",
+    "found": "Leiti {count} kuulutust",
+    "loading": "Kuulutusi laaditakse...",
+    "noListings": "Kuulutusi ei leitud",
+    "noListingsDescription": "Proovi filtreid kohandada või vaata hiljem uuesti",
+    "createFirst": "Loo esimene kuulutus",
+    "viewModes": {
+      "grid": "Võrk",
+      "map": "Kaart"
+    },
+    "filters": {
+      "title": "Filtrid",
+      "city": "Linn",
+      "propertyType": "Kinnisvara tüüp",
+      "priceRange": "Hinnavahemik",
+      "minPrice": "Min hind",
+      "maxPrice": "Max hind",
+      "bedrooms": "Magamistoad",
+      "furnished": "Mööbleeritud",
+      "expatFriendly": "Välismaalasesõbralik",
+      "clearFilters": "Puhasta filtrid",
+      "showMore": "Näita rohkem",
+      "showLess": "Näita vähem",
+      "allCities": "Kõik linnad",
+      "priceHint": "Hinnavahemik (€/kuu)",
+      "minBedrooms": "Miinimum magamistube",
+      "any": "Suvaline"
+    },
+    "propertyTypes": {
+      "all": "Kõik tüübid",
+      "apartment": "Korter",
+      "house": "Maja",
+      "room": "Tuba",
+      "studio": "Stuudio"
+    },
+    "details": {
+      "price": "€{price}/kuu",
+      "priceLabel": "Hind",
+      "areaLabel": "Pindala",
+      "bedroomsLabel": "Magamistoad",
+      "bathroomsLabel": "Vannitoad",
+      "bedrooms": "{count} tuba",
+      "bathrooms": "{count} vannituba",
+      "area": "{sqm} m²",
+      "furnished": "Mööbleeritud",
+      "expatFriendly": "Välismaalasesõbralik",
+      "description": "Kirjeldus",
+      "details": "Detailid",
+      "propertyType": "Kinnisvara tüüp",
+      "backToListings": "← Tagasi kuulutuste juurde",
+      "watchVideo": "Vaata videot",
+      "contact": "Võta omanikuga ühendust",
+      "listingId": "Kuulutuse ID: {id}",
+      "noPhotos": "Fotosid pole veel üles laaditud.",
+      "area": "Pindala",
+      "monthlyRent": "Igakuine üür",
+      "features": "Funktsioonid",
+      "photos": "Fotod",
+      "address": "Aadress",
+      "status": {
+        "pending": "Ootel",
+        "active": "Aktiivne",
+        "rejected": "Tagasi lükatud",
+        "archived": "Arhiveeritud"
+      }
+    }
+  },
+  "map": {
+    "loading": "Kaart laadib..."
+  },
+  "listingCard": {
+    "furnished": "Mööbleeritud",
+    "expatFriendly": "Välismaalasesõbralik",
+    "perMonth": "/kuu",
+    "bed": "{count} magamistuba",
+    "bath": "{count} vannituba"
+  },
+  "createListing": {
+    "pageTitle": "Loo uus kuulutus",
+    "pageSubtitle": "Lisa oma kinnisvara ja ühenda endaga kodu otsivad välismaalased",
+    "steps": ["Kategooria", "Aadress", "Üksikasjad", "Meedia", "Hinnastamine", "Saadavus", "Eelvaade"],
+    "categoryTitle": "Vali kinnisvara tüüp",
+    "addressTitle": "Kinnisvara aadress",
+    "detailsTitle": "Kinnisvara üksikasjad",
+    "mediaTitle": "Fotod ja video",
+    "pricingTitle": "Hinnastamine",
+    "availabilityTitle": "Saadavus",
+    "previewTitle": "Vaata oma kuulutust üle",
+    "propertyType": "Kinnisvara tüüp",
+    "title": "Pealkiri",
+    "titlePlaceholder": "nt Modernne 2-toaline korter Tallinna kesklinnas",
+    "description": "Kirjeldus",
+    "descriptionPlaceholder": "Kirjelda oma kinnisvara üksikasjalikult...",
+    "bedrooms": "Magamistoad",
+    "bathrooms": "Vannitoad",
+    "area": "Pindala (m²)",
+    "furnished": "Mööbleeritud",
+    "expatFriendly": "Välissõbralik tõotus",
+    "images": "Pildid",
+    "youtube": "YouTube'i URL (valikuline)",
+    "monthlyRent": "Igakuine üür (€)",
+    "availableFrom": "Saadaval alates",
+    "features": "Funktsioonid",
+    "publish": "Avalda kuulutus",
+    "creating": "Loon...",
+    "back": "Tagasi",
+    "next": "Järgmine",
+    "preview": {
+      "monthlyRent": "Igakuine üür",
+      "address": "Aadress"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Tere tulemast tagasi",
+      "subtitle": "Logi oma Xpatly kontole",
+      "email": "Email",
+      "password": "Parool",
+      "forgotPassword": "Unustasid parooli?",
+      "signIn": "Logi sisse",
+      "signingIn": "Sisenen...",
+      "orContinueWith": "Või jätka",
+      "signInWithGoogle": "Logi sisse Google'iga",
+      "noAccount": "Konto puudub?",
+      "signUp": "Loo konto"
+    },
+    "register": {
+      "title": "Loo konto",
+      "subtitle": "Liitu Xpatlyga ja leia oma kodu",
+      "email": "Email",
+      "password": "Parool",
+      "confirmPassword": "Kinnita parool",
+      "createAccount": "Loo konto",
+      "creating": "Loon...",
+      "hasAccount": "Juba konto olemas?",
+      "signIn": "Logi sisse",
+      "passwordHint": "Peab olema vähemalt 8 tähemärki koos suur- ja väiketähtede ning numbritega",
+      "success": "Konto loodud! Palun kontrolli oma e-posti.",
+      "withGoogle": "Registreeru Google'iga",
+      "terms": "Kasutustingimused",
+      "privacy": "Privaatsuspoliitika",
+      "agree": "Registreerudes nõustud meiega"
+    },
+    "errors": {
+      "invalidCredentials": "Vale email või parool",
+      "emailInUse": "Email on juba kasutusel",
+      "weakPassword": "Parool on liiga nõrk",
+      "generic": "Ilmnes viga. Palun proovi uuesti."
+    }
+  },
+  "admin": {
+    "title": "Admin paneel",
+    "dashboard": {
+      "title": "Töölaud",
+      "totalListings": "Kuulutusi kokku",
+      "pendingListings": "Ootel kuulutused",
+      "activeListings": "Aktiivsed kuulutused",
+      "flaggedContent": "Märgistatud sisu",
+      "totalUsers": "Kasutajaid kokku",
+      "needsAttention": "Vajab tähelepanu"
+    },
+    "navigation": {
+      "dashboard": "Töölaud",
+      "pendingListings": "Ootel kuulutused",
+      "flaggedContent": "Märgistatud sisu",
+      "users": "Kasutajad"
+    },
+    "listings": {
+      "title": "Ootel kuulutused",
+      "subtitle": "Vaata ja modereeri kinnitamist ootavaid kuulutusi",
+      "allCaughtUp": "Kõik tehtud!",
+      "noPending": "Hetkel ootel kuulutusi ei ole.",
+      "approve": "Kinnita",
+      "reject": "Lükka tagasi",
+      "approving": "Kinnitan...",
+      "confirmRejection": "Kinnita tagasilükkamine",
+      "rejectionReason": "Anna tagasilükkamise põhjus (kuvatakse kasutajale)",
+      "postedBy": "Postitas: {email}",
+      "alreadyReviewed": "Juba {status}"
+    },
+    "flagged": {
+      "title": "Märgistatud sisu",
+      "subtitle": "Vaata Expat-Friendly süsteemi poolt märgitud kuulutusi",
+      "flagged": "Märgistatud: {reason}",
+      "detectedPhrase": "Tuvastatud fraas: \"{phrase}\"",
+      "flaggedOn": "Märgistatud kuupäeval {date}"
+    },
+    "users": {
+      "title": "Kasutajate haldus",
+      "subtitle": "Halda kasutajakontosid, rolle ja õigusi",
+      "user": "Kasutaja",
+      "role": "Roll",
+      "status": "Staatus",
+      "listings": "Kuulutused",
+      "joined": "Liitus",
+      "actions": "Tegevused",
+      "verify": "Verifitseeri",
+      "ban": "Keela",
+      "unban": "Tühista keeld",
+      "changeRole": "Roll ▼",
+      "roles": {
+        "user": "Kasutaja",
+        "owner": "Omanik",
+        "moderator": "Moderaator",
+        "super_admin": "Superadmin"
+      },
+      "statusBadges": {
+        "verified": "Verifitseeritud",
+        "banned": "Keelatud",
+        "unverified": "Verifitseerimata"
+      }
+    }
+  }
+}

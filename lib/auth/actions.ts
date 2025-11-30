@@ -16,6 +16,25 @@ export async function signIn(email: string, password: string) {
     return { error: error.message }
   }
 
+  // Ensure user exists in users table
+  if (data.user) {
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('id')
+      .eq('id', data.user.id)
+      .single()
+
+    if (!existingUser) {
+      await supabase.from('users').insert({
+        id: data.user.id,
+        email: data.user.email || '',
+        role: 'user',
+        is_verified: false,
+        is_banned: false,
+      })
+    }
+  }
+
   revalidatePath('/', 'layout')
   return { success: true, user: data.user }
 }
@@ -33,6 +52,17 @@ export async function signUp(email: string, password: string) {
 
   if (error) {
     return { error: error.message }
+  }
+
+  // Create user in users table
+  if (data.user) {
+    await supabase.from('users').insert({
+      id: data.user.id,
+      email: data.user.email || '',
+      role: 'user',
+      is_verified: false,
+      is_banned: false,
+    })
   }
 
   return {

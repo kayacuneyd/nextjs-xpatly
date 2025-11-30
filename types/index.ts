@@ -137,7 +137,7 @@ export interface CreateListingFormData {
   price: number
 
   // Step 6: Availability
-  available_from: string
+  available_from?: string
 }
 
 // API Response types

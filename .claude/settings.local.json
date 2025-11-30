@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(node --version:*)",
+      "Bash(brew:*)",
+      "Bash(/opt/homebrew/bin/brew install node)",
+      "Bash(npm:*)",
+      "Bash(tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(/opt/homebrew/bin/node --version)",
+      "Bash(/opt/homebrew/bin/node /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js run build)",
+      "Bash(export PATH=\"/opt/homebrew/bin:$PATH\")",
+      "Bash(timeout 120 npm run build)",
+      "Bash(echo:*)",
+      "Bash(export PATH=/opt/homebrew/bin:$PATH)",
+      "Bash(cat:*)",
+      "Bash(/usr/bin/grep:*)",
+      "Bash(/usr/bin/head:*)",
+      "Bash(/usr/bin/tail:*)",
+      "Bash(pkill:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

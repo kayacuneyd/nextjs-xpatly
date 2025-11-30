@@ -75,7 +75,6 @@ export const detailsStepSchema = z.object({
 export const mediaStepSchema = z.object({
   images: z
     .array(z.instanceof(File))
-    .min(1, 'At least 1 image is required')
     .max(40, 'Maximum 40 images allowed')
     .refine(
       (files) => files.every((file) => file.size <= 5 * 1024 * 1024),
@@ -89,7 +88,8 @@ export const mediaStepSchema = z.object({
           )
         ),
       'Only JPG, PNG, and WebP images are allowed'
-    ),
+    )
+    .default([]),
   youtube_url: z
     .string()
     .url('Must be a valid YouTube URL')
@@ -108,7 +108,7 @@ export const pricingStepSchema = z.object({
 
 // Step 6: Availability
 export const availabilityStepSchema = z.object({
-  available_from: z.string().min(1, 'Please select an availability date'),
+  available_from: z.string().default(''),
 })
 
 // Complete listing schema
