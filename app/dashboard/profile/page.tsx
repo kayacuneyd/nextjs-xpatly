@@ -1,14 +1,20 @@
 'use client'
 
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { UserNav } from '@/components/ui/user-nav'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 type UserType = 'landlord' | 'tenant' | 'both'
 
 export default function ProfilePage() {
   const router = useRouter()
+  const pathname = usePathname()
+  const t = useTranslations()
+  const locale = pathname?.split('/')[1] || 'en'
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
@@ -127,16 +133,45 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <Link href="/dashboard" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
-            ← Back to Dashboard
+    <div className="flex min-h-screen flex-col bg-gray-50">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <Link href={`/${locale}`} className="flex items-center gap-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-xl">X</span>
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Xpatly
+            </span>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 mt-4">Edit Profile</h1>
-          <p className="mt-2 text-gray-600">Update your account settings</p>
+
+          <nav className="hidden md:flex items-center gap-8">
+            <Link href={`/${locale}/listings`} className="text-gray-600 hover:text-gray-900 font-medium transition">
+              {t('nav.listings')}
+            </Link>
+            <Link href={`/${locale}/about`} className="text-gray-600 hover:text-gray-900 font-medium transition">
+              {t('nav.about')}
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <UserNav user={{ email: profile.email }} />
+          </div>
         </div>
+      </header>
+
+      <main className="flex-1 pt-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Header */}
+          <div className="mb-8">
+            <Link href="/dashboard" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+              ← Back to Dashboard
+            </Link>
+            <h1 className="text-3xl font-bold text-gray-900 mt-4">Edit Profile</h1>
+            <p className="mt-2 text-gray-600">Update your account settings</p>
+          </div>
 
         {/* Message */}
         {message && (
@@ -318,7 +353,54 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">X</span>
+                </div>
+                <span className="text-2xl font-bold text-white">Xpatly</span>
+              </div>
+              <p className="text-sm">
+                Fighting housing discrimination in Estonia. Housing for everyone.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">Platform</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href={`/${locale}/listings`} className="hover:text-white transition">Browse Listings</Link></li>
+                <li><Link href={`/${locale}/create-listing`} className="hover:text-white transition">Create Listing</Link></li>
+                <li><Link href={`/${locale}/about`} className="hover:text-white transition">About Us</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href={`/${locale}/terms`} className="hover:text-white transition">Terms of Service</Link></li>
+                <li><Link href={`/${locale}/privacy`} className="hover:text-white transition">Privacy Policy</Link></li>
+                <li><a href="mailto:support@xpatly.com" className="hover:text-white transition">Contact Us</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">Languages</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href="/en/dashboard/profile" className="hover:text-white transition">🇬🇧 English</Link></li>
+                <li><Link href="/et/dashboard/profile" className="hover:text-white transition">🇪🇪 Eesti</Link></li>
+                <li><Link href="/ru/dashboard/profile" className="hover:text-white transition">🇷🇺 Русский</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-sm">
+            <p>{t('common.footer')}</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
